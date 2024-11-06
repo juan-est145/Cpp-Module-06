@@ -40,7 +40,32 @@ void Guesser::identify(Base *p)
 
 void Guesser::identify(Base &p)
 {
-	(void)p;
+	std::cout << "The pointer is of type ";
+	try
+	{
+		dynamic_cast<A &>(p);
+		std::cout << "A" << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		try
+		{
+			dynamic_cast<B &>(p);
+			std::cout << "B" << std::endl;
+		}
+		catch (const std::exception &e)
+		{
+			try
+			{
+				dynamic_cast<C &>(p);
+				std::cout << "C" << std::endl;
+			}
+			catch (const std::exception &e)
+			{
+				std::cerr << "Unknown type" << '\n';
+			}
+		}
+	}
 }
 
 Guesser::~Guesser()
